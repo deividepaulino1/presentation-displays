@@ -73,15 +73,15 @@ class DisplayManager {
   ///
   /// @return The display's name.
   /// May be null.
-  FutureOr<String?> getNameByDisplayId(int displayId, {String? category}) async {
-    List<Display> displays = await getDisplays(category: category) ?? [];
+  // FutureOr<String?> getNameByDisplayId(String displayId, {String? category}) async {
+  //   List<Display> displays = await getDisplays(category: category) ?? [];
 
-    String? name;
-    displays.forEach((element) {
-      if (element.displayId == displayId) name = element.name;
-    });
-    return name;
-  }
+  //   String? name;
+  //   displays.forEach((element) {
+  //     if (element.displayId == displayId) name = element.name;
+  //   });
+  //   return name;
+  // }
 
   /// Gets the name of the display by [index] of [getDisplays].
   /// <p>
@@ -92,12 +92,12 @@ class DisplayManager {
   ///
   /// @return The display's name
   /// May be null.
-  FutureOr<String?> getNameByIndex(int index, {String? category}) async {
-    List<Display> displays = await getDisplays(category: category) ?? [];
-    String? name;
-    if (index >= 0 && index <= displays.length) name = displays[index].name;
-    return name;
-  }
+  // FutureOr<String?> getNameByIndex(int index, {String? category}) async {
+  //   List<Display> displays = await getDisplays(category: category) ?? [];
+  //   String? name;
+  //   if (index >= 0 && index <= displays.length) name = displays[index].name;
+  //   return name;
+  // }
 
   /// Creates a new secondary display that is attached to the specified display
   /// <p>
@@ -109,7 +109,7 @@ class DisplayManager {
   ///
   /// return [Future<bool>] about the status has been display or not
   Future<bool?>? showSecondaryDisplay(
-      {required int displayId, required String routerName}) {
+      {required String displayId, required String routerName}) {
     return _displayMethodChannel?.invokeMethod<bool?>(
         _showPresentation,
         "{"

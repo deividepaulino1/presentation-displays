@@ -86,8 +86,8 @@ class _DisplayManagerScreenState extends State<DisplayManagerScreen> {
               _getDisplays(),
               _showPresentation(),
               _transferData(),
-              _getDisplayeById(),
-              _getDisplayByIndex(),
+              // _getDisplayeById(),
+              // _getDisplayByIndex(),
             ],
           ),
         ),
@@ -120,7 +120,7 @@ class _DisplayManagerScreenState extends State<DisplayManagerScreen> {
                 height: 50,
                 child: Center(
                     child: Text(
-                        ' ${displays[index]?.displayId} ${displays[index]?.name}')),
+                        ' ${displays[index]?.a} ${displays[index]?.d}')),
               );
             }),
         Divider()
@@ -148,7 +148,7 @@ class _DisplayManagerScreenState extends State<DisplayManagerScreen> {
           if (index != null && index < displays.length) {
             displayManager.showSecondaryDisplay(
                 displayId:
-                    displays.length > 0 ? displays[index]?.displayId ?? -1 : 1,
+                    displays.length > 0 ? displays[index]?.a.toString() ?? "-1" : "1",
                 routerName: "presentation");
           }
         }),
@@ -183,74 +183,74 @@ class _DisplayManagerScreenState extends State<DisplayManagerScreen> {
     );
   }
 
-  Widget _getDisplayeById() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            controller: _nameOfIdController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Id',
-            ),
-          ),
-        ),
-        Button("NameByDisplayId", () async {
-          int? id = int.tryParse(_nameOfIdController.text);
-          if (id != null) {
-            final value = await displayManager
-                .getNameByDisplayId(displays[id]?.displayId ?? -1);
-            print(value);
-            setState(() {
-              _nameOfId = value ?? "";
-            });
-          }
-        }),
-        Container(
-          height: 50,
-          child: Center(child: Text(_nameOfId)),
-        ),
-        Divider(),
-      ],
-    );
-  }
+  // Widget _getDisplayeById() {
+  //   return Column(
+  //     mainAxisAlignment: MainAxisAlignment.center,
+  //     crossAxisAlignment: CrossAxisAlignment.center,
+  //     children: [
+  //       Padding(
+  //         padding: const EdgeInsets.all(8.0),
+  //         child: TextField(
+  //           controller: _nameOfIdController,
+  //           decoration: InputDecoration(
+  //             border: OutlineInputBorder(),
+  //             labelText: 'Id',
+  //           ),
+  //         ),
+  //       ),
+  //       Button("NameByDisplayId", () async {
+  //         int? id = int.tryParse(_nameOfIdController.text);
+  //         if (id != null) {
+  //           final value = await displayManager
+  //               .getNameByDisplayId(displays[id]?.a.toString() ?? "-1");
+  //           print(value);
+  //           setState(() {
+  //             _nameOfId = value ?? "";
+  //           });
+  //         }
+  //       }),
+  //       Container(
+  //         height: 50,
+  //         child: Center(child: Text(_nameOfId)),
+  //       ),
+  //       Divider(),
+  //     ],
+  //   );
+  // }
 
-  Widget _getDisplayByIndex() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            controller: _nameOfIndexController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Index',
-            ),
-          ),
-        ),
-        Button("NameByIndex", () async {
-          int? index = int.tryParse(_nameOfIndexController.text);
-          if (index != null) {
-            final value = await displayManager.getNameByIndex(index);
-            print(value);
-            setState(() {
-              _nameOfIndex = value ?? "";
-            });
-          }
-        }),
-        Container(
-          height: 50,
-          child: Center(child: Text(_nameOfIndex)),
-        ),
-        Divider(),
-      ],
-    );
-  }
+  // Widget _getDisplayByIndex() {
+  //   return Column(
+  //     mainAxisAlignment: MainAxisAlignment.center,
+  //     crossAxisAlignment: CrossAxisAlignment.center,
+  //     children: [
+  //       Padding(
+  //         padding: const EdgeInsets.all(8.0),
+  //         child: TextField(
+  //           controller: _nameOfIndexController,
+  //           decoration: InputDecoration(
+  //             border: OutlineInputBorder(),
+  //             labelText: 'Index',
+  //           ),
+  //         ),
+  //       ),
+  //       Button("NameByIndex", () async {
+  //         int? index = int.tryParse(_nameOfIndexController.text);
+  //         if (index != null) {
+  //           final value = await displayManager.getNameByIndex(index);
+  //           print(value);
+  //           setState(() {
+  //             _nameOfIndex = value ?? "";
+  //           });
+  //         }
+  //       }),
+  //       Container(
+  //         height: 50,
+  //         child: Center(child: Text(_nameOfIndex)),
+  //       ),
+  //       Divider(),
+  //     ],
+  //   );
+  // }
 }
 
 /// UI of Presentation display
@@ -260,18 +260,25 @@ class SecondaryScreen extends StatefulWidget {
 }
 
 class _SecondaryScreenState extends State<SecondaryScreen> {
-  String value = "init";
+  int value = 0;
 
   @override
   Widget build(BuildContext context) {
     return SecondaryDisplay(
       callback: (argument) {
         setState(() {
-          value = argument;
+          value = int.parse(argument);
         });
       },
-      child: Center(
-        child: Text(value),
+      child: Scaffold(
+        body: Row(
+          children: [
+            Text("Barang"),
+            Center(
+              child: Text("Total Harga ${value}"),
+            ),
+          ],
+        ),
       ),
     );
   }

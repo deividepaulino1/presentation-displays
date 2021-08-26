@@ -55,9 +55,9 @@ class PresentationDisplaysPlugin() : FlutterPlugin, ActivityAware, MethodChannel
       "showPresentation" -> {
         try {
           val obj = JSONObject(call.arguments as String)
-          Log.i(TAG, "Channel: method: ${call.method} | displayId: ${obj.getInt("displayId")} | routerName: ${obj.getString("routerName")}")
+          Log.i(TAG, "Channel: method: ${call.method} | displayId: ${obj.getString("displayId")} | routerName: ${obj.getString("routerName")}")
 
-          val displayId: Int = obj.getInt("displayId")
+          val displayId: Int = obj.getString("displayId").toInt()
           val tag: String = obj.getString("routerName")
           val display = displayManager?.getDisplay(displayId)
           val flutterEngine = createFlutterEngine(tag)
@@ -86,7 +86,7 @@ class PresentationDisplaysPlugin() : FlutterPlugin, ActivityAware, MethodChannel
 
         if (displays!=null) {
           for (display: Display in displays) {
-            val d = DisplayJson(display.displayId, display.flags, display.rotation, display.name)
+            val d = DisplayJson(display.displayId.toString(), display.flags.toString(), display.orientation.toString(), display.name)
             listJson.add(d)
           }
           result.success(gson.toJson(listJson))

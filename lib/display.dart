@@ -1,12 +1,12 @@
 Display displayFromJson(Map<String, dynamic> json) => Display(
-    displayId: json['displayId'],
-    flag: json['flags'],
-    name: json['name'],
-    rotation: json['rotation']);
+    a: json['a'],
+    b: json['b'],
+    c: json['c'],
+    d: json['d']);
 
 /// The default Display id, which is the id of the built-in primary display
 /// assuming there is one.
-const int DEFAULT_DISPLAY = 0;
+const String DEFAULT_DISPLAY = "0";
 
 /// Invalid display id.
 const int INVALID_DISPLAY = -1;
@@ -110,13 +110,13 @@ class Display {
   /// Each logical display has a unique id.
   /// The default display has id [DEFAULT_DISPLAY]
   /// </p>
-  int displayId = DEFAULT_DISPLAY;
+  String a = DEFAULT_DISPLAY;
 
   /// Returns a combination of flags that describe the capabilities of the display.
   /// @return The display flags.
   ///
   /// See [FLAG_SUPPORTS_PROTECTED_BUFFERS], [FLAG_SECURE], [FLAG_PRIVATE]
-  int? flag;
+  String? b;
 
   /// Returns the rotation of the screen from its "natural" orientation.
   /// The returned value may be [ROTATION_0]
@@ -130,7 +130,7 @@ class Display {
   /// degrees counter-clockwise, to compensate rendering will be rotated by
   /// 90 degrees clockwise and thus the returned value here will be
   /// [ROTATION_90].
-  int? rotation;
+  String? c;
 
   /// Gets the name of the display.
   /// <p>
@@ -138,8 +138,8 @@ class Display {
   /// </p>
   ///
   /// @return The display's name.
-  String name;
+  String? d;
 
   Display(
-      {required this.displayId, this.flag, required this.name, this.rotation});
+      {required this.a, this.b, required this.c, this.d});
 }

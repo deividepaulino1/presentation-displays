@@ -41,6 +41,8 @@ android {
         applicationId "com.namit.presentation_displays_example"
         minSdkVersion 17
         targetSdkVersion 28
+        // minifyEnabled false
+        // useProguard false
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
